@@ -1,0 +1,8 @@
+.example-card {
+    max-width: 400px;
+  }
+  
+  .example-header-image {
+    background-image: url('https://www.pemex.com/Style%20Library/Images/pmx2013/header/logo-internet2019.svg');
+    background-size: cover;
+  }

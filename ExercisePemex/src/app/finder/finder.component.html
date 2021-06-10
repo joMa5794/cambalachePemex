@@ -1,0 +1,81 @@
+<mat-drawer-container class="example-container" style="width: 100%; height: 100%;">
+    <mat-drawer mode="side" opened>
+        <mat-card>
+            <div class="row" style="padding: 15px;">
+                <div class="col-md-12">
+                    <h3 style="text-align: center;">Mi buscador de anuncios empresarial entre trabajadores</h3>
+                    <form class="example-form" [formGroup]="formFilters">
+                        <div class="row">
+                            <div class="col-md-12" style="width: 100%;">
+                                <mat-form-field class="example-full-width" style="width: 100%;">
+                                    <mat-label>Anuncio</mat-label>
+                                    <input matInput placeholder="Buscar" formControlName="name"
+                                        (change)="onFilterChange()">
+                                </mat-form-field>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12" style="width: 100%;">
+                                <mat-form-field appearance="fill" style="width: 100%;">
+                                    <mat-label>Tipo</mat-label>
+                                    <mat-select formControlName="typeP" (selectionChange)="onFilterChange()">
+                                        <mat-option *ngFor="let type of types" [value]="type.id">
+                                            {{type.description}}
+                                        </mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <mat-form-field class="example-full-width">
+                                    <mat-label>Precio mínimo</mat-label>
+                                    <input matInput placeholder="mínimo" formControlName="min"
+                                        (change)="onFilterChange()">
+                                </mat-form-field>
+                            </div>
+                            <div class="col-md-6">
+                                <mat-form-field class="example-full-width">
+                                    <mat-label>Precio máximo</mat-label>
+                                    <input matInput placeholder="máximo" formControlName="max"
+                                        (change)="onFilterChange()">
+                                </mat-form-field>
+                            </div>
+                        </div>
+                        <div class="row" style="vertical-align: bottom; text-align: center;">
+                            <div class="col-md-12" style="text-align: center;">
+                                <button type="button" class="btn btn-primary" (click)="onFilterChange()">Buscar</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </mat-card>
+    </mat-drawer>
+    <mat-drawer-content>
+        <mat-card>
+            <div class="row">
+                <div class="col-md-12">
+                    <button type="button" class="btn btn-accent" (click)="sendMail()">Buscar</button>
+                </div>
+            </div>
+            <div class="row">
+                <ng-container *ngFor="let product of dataSource">
+                    <mat-card class="example-card">
+                        <mat-card-header>
+                            <div mat-card-avatar class="example-header-image"></div>
+                            <mat-card-title>{{product.name}}</mat-card-title>
+                        </mat-card-header>
+                        <img mat-card-image style="width: 200px; height: 150px;"
+                            src="{{ 'data:image/jpeg;base64,' + product.image64}}" alt="Producto">
+                        <mat-card-content>
+                            <span class="level-item has-text-weight-bold">{{product.price |
+                                currency:"MXN":"symbol"}}</span>
+                        </mat-card-content>
+                    </mat-card>
+                </ng-container>
+            </div>
+           
+        </mat-card>
+    </mat-drawer-content>
+</mat-drawer-container>
